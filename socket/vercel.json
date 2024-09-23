@@ -1,0 +1,10 @@
+{
+    "name": "socket",
+    "builds": [
+      { "src": "app.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+      { "src": "/socket/(.*)", "dest": "/app.js" }
+    ]
+  }
+  
