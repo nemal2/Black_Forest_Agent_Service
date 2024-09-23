@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiRequest = axios.create({
-    baseURL:"http://localhost:8800/api",
+    baseURL:"https://black-forest-agent-service.vercel.app/api",
     //http://localhost:8800/api
     //https://mern-black-forest-full-stack.onrender.com
     withCredentials : true,
