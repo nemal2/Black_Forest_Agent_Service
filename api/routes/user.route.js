@@ -10,11 +10,9 @@ router.get("/", getUsers);
 router.put("/:id",verifyToken, updateUser);
 router.delete("/:id",verifyToken, deleteUser);
 router.post("/save",verifyToken, savePost);
-// router.get("/profilePosts",verifyToken, profilePosts);
-// router.get("/notification",verifyToken, getNotificationNumber);
+router.get("/profilePosts",verifyToken, profilePosts);
+router.get("/notification",verifyToken, getNotificationNumber);
 
-router.get("/profilePosts", profilePosts);
-router.get("/notification",getNotificationNumber);
 
 
 
