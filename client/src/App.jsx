@@ -41,6 +41,16 @@ function App() {
           path: "/contact",
           element: <ContactPage />,
         },
+        {
+          path: "/:id",
+          element: <SinglePage />,
+          loader: singlePageLoader
+        },
+        {
+          path: "/profile",
+          element: <ProfilePage />,
+          loader: profilePageLoader
+        },
         
       ],
     },
@@ -54,16 +64,16 @@ function App() {
           element: <ListPage />,
           loader: listPageLoader,
         },
-        {
-          path: "/:id",
-          element: <SinglePage />,
-          loader: singlePageLoader
-        },
-        {
-          path: "/profile",
-          element: <ProfilePage />,
-          loader: profilePageLoader
-        },
+        // {
+        //   path: "/:id",
+        //   element: <SinglePage />,
+        //   loader: singlePageLoader
+        // },
+        // {
+        //   path: "/profile",
+        //   element: <ProfilePage />,
+        //   loader: profilePageLoader
+        // },
         {
           path: "/profile/update",
           element: <ProfileUpdatePage />,
