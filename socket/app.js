@@ -1,6 +1,11 @@
-import { Server, Socket } from "socket.io";
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import express from 'express';
 
-const io = new Server({
+const app = express();
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
   cors: {
     origin: [
       //"http://localhost:5173", // Development origin
@@ -20,25 +25,31 @@ const addUser = (userId, socketId) => {
 
 const removeUser = (socketId) => {
   onlineUser = onlineUser.filter((user) => user.socketId !== socketId);
-}
+};
 
 const getUser = (userId) => {
   return onlineUser.find((user) => user.userId === userId);
-}
+};
 
 io.on("connection", (socket) => {
   socket.on("test", (userId) => {
     addUser(userId, socket.id);
   });
 
-  socket.on("sendMessage", ({receiverId, data})=>{
+  socket.on("sendMessage", ({ receiverId, data }) => {
     console.log(receiverId);
-    io.to(receiver.socketId).emit("getMessage", data);
-  })
+    const receiver = getUser(receiverId);
+    if (receiver) {
+      io.to(receiver.socketId).emit("getMessage", data);
+    }
+  });
 
-  socket.on("disconnect", ()=> {
-    removeUser(socket.id)
-  })
+  socket.on("disconnect", () => {
+    removeUser(socket.id);
+  });
 });
 
-io.listen("0.0.0.0");
+const PORT = process.env.PORT || 3000;
+httpServer.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
